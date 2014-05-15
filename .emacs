@@ -13,7 +13,7 @@
                       elisp-slime-nav paredit
                       smex scpaste parenface-plus
                       find-file-in-project magit
-                      clojure-mode))
+                      ido-ubiquitous clojure-mode))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -23,10 +23,11 @@
 
 (set-face-foreground 'vertical-border "white")
 
+;; this looks gross in low-color mode
 (when (<= (display-color-cells) 8)
   (defun hl-line-mode () (interactive)))
 
-;; erc? why not
+;;; erc? why not
 
 (setq erc-prompt ">"
       erc-fill-column 75
@@ -61,12 +62,19 @@
      (setq-default erc-ignore-list '("Lajla"))
      (add-to-list 'erc-modules 'hl-nicks)
      (add-to-list 'erc-modules 'spelling)
+     (define-key erc-mode-map (kbd "C-c r") 'pnh-reset-erc-track-mode)
      (set-face-foreground 'erc-input-face "dim gray")
      (set-face-foreground 'erc-my-nick-face "blue")))
 
-;;; bindings
+(defun pnh-reset-erc-track-mode ()
+  (interactive)
+  (setq erc-modified-channels-alist nil)
+  (erc-modified-channels-update)
+  (erc-modified-channels-display))
 
-(global-set-key (kbd "C-c C-j") 'nrepl-jack-in)
+;;; bindings
+
+(global-set-key (kbd "C-c C-j") 'cider-jack-in)
 
 (global-set-key (kbd "C-c f") 'find-file-in-project)
 
@@ -97,11 +105,12 @@
                   (untabify (point-min) (point-max))
                   (indent-region (point-min) (point-max))))
 
-(global-set-key (kbd "C-c b")
-                (defun pnh-blog () (interactive)
-                  (shell-command (format "rake post POST=%s"
-                                         (car (split-string (buffer-name)
-                                                            "\\."))))))
+;; atreus bindings
+(global-set-key (kbd "C-x '") 'delete-other-windows)
+(global-set-key (kbd "C-x ,") 'split-window-below)
+(global-set-key (kbd "C-x .") 'split-window-right)
+(global-set-key (kbd "C-x l") 'delete-window)
+
 (eval-after-load 'paredit
   ;; need a binding that works in the terminal
   '(progn
@@ -126,7 +135,7 @@
 
 (add-hook 'clojure-mode-hook 'paredit-mode)
 
-(add-hook 'nrepl-connected-hook
+(add-hook 'cider-connected-hook
           (defun pnh-clojure-mode-eldoc-hook ()
             (add-hook 'clojure-mode-hook 'turn-on-eldoc-mode)))
 
