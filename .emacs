@@ -2,7 +2,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "https://marmalade-repo.org/packages/"))
 (package-initialize)
 
 (when (null package-archive-contents)
@@ -117,7 +117,7 @@
      (define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp)
      (define-key paredit-mode-map (kbd "M-(") 'paredit-backward-slurp-sexp)))
 
-;;; eshell
+;;; eshell
 
 (defun eshell/rgrep (&rest args)
   "Use Emacs grep facility instead of calling external grep."
@@ -127,7 +127,7 @@
   "Change directory to the project's root."
   (eshell/cd (locate-dominating-file default-directory ".git")))
 
-;;; programming
+;;; programming
 
 (add-hook 'prog-mode-hook 'whitespace-mode)
 (add-hook 'prog-mode-hook 'idle-highlight-mode)
@@ -149,3 +149,16 @@
 
 (define-key read-expression-map (kbd "TAB") 'lisp-complete-symbol)
 (define-key lisp-mode-shared-map (kbd "RET") 'reindent-then-newline-and-indent)
+
+
+;;; other
+
+(defun disapproval () (interactive) (insert "ಠ_ಠ"))
+(defun eyeroll () (interactive) (insert "◔_◔"))
+(defun tables () (interactive) (insert "（╯°□°）╯︵ ┻━┻"))
+(defun mu () (interactive) (insert "無"))
+(defun rectification () (interactive) (insert "正名"))
+(defun caruso () (interactive) (insert "( •_•) ( -_-)~⌐■-■ (⌐■_■)>"))
+
+(winner-mode)
+(global-set-key (kbd "C-c w") 'winner-undo)
