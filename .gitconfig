@@ -1,6 +1,6 @@
 [user]
-    name = Phil Hagelberg
-    email = technomancy@gmail.com
+    name = Seajure
+    email = seajure@pobox.com
 [color]
     branch = auto
     diff = auto
@@ -12,7 +12,5 @@
     xfuncname = "^\\(.*"
 [alias]
     shorten = "!sh -c 'curl -i http://git.io -F url=$1' -"
-[heroku]
-	remote = heroku
 [github]
-	user = technomancy
+	user = seajure

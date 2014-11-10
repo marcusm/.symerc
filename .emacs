@@ -13,7 +13,8 @@
                       elisp-slime-nav paredit
                       smex scpaste parenface-plus
                       find-file-in-project magit
-                      ido-ubiquitous clojure-mode))
+                      ido-ubiquitous clojure-mode
+                      cider))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
