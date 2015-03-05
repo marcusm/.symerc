@@ -13,6 +13,6 @@ export CDPATH=.:$HOME/src
 # plz don't make me sudo
 export GEM_HOME=$HOME/.gem/ruby/1.9.1
 
-export EDITOR="emacsclient"
+export EDITOR="vim"
 
 export PROFILE_LOADED=y
